@@ -5,7 +5,10 @@
 package opencv
 
 /*
-#cgo linux  pkg-config: opencv
+//#cgo android CFLAGS: -I${SRCDIR}/opencv-libs/jni/include
+//#cgo android,arm LDFLAGS: -L${SRCDIR}/opencv-libs/libs/armeabi-v7a -lopencv_java
+//#cgo android,386 LDFLAGS: -L${SRCDIR}/opencv-libs/libs/x86 -lopencv_java -lm
+#cgo linux,!android  pkg-config: opencv
 // Add the math library link on arm, as opencv is built without gl support on
 // debian and ubuntu. This one is thus using lrint which is in the math library.
 // The pkg-config arm file doesn't add it though.
