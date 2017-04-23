@@ -184,3 +184,16 @@ func MinAreaRect(points unsafe.Pointer) Box2D {
 func BoundingRect(points unsafe.Pointer) Rect {
 	return (Rect)(C.cvBoundingRect(points, C.int(0)))
 }
+
+const (
+	CV_TM_SQDIFF        = int(C.CV_TM_SQDIFF)
+	CV_TM_SQDIFF_NORMED = int(C.CV_TM_SQDIFF_NORMED)
+	CV_TM_CCORR         = int(C.CV_TM_CCORR)
+	CV_TM_CCORR_NORMED  = int(C.CV_TM_CCORR_NORMED)
+	CV_TM_CCOEFF        = int(C.CV_TM_CCOEFF)
+	CV_TM_CCOEFF_NORMED = int(C.CV_TM_CCOEFF_NORMED)
+)
+
+func MatchTemplate(img, template, result *IplImage, method int) {
+	C.cvMatchTemplate(unsafe.Pointer(img), unsafe.Pointer(template), unsafe.Pointer(result), C.int(method))
+}

@@ -936,6 +936,19 @@ func (this *Font) PutText(image *IplImage, text string, pt1 Point, color Scalar)
 	)
 }
 
+func Normalize(src, dst *IplImage, a, b float32) {
+	C.cvNormalize(unsafe.Pointer(src), unsafe.Pointer(dst), C.double(a), C.double(b), C.CV_MINMAX, nil)
+}
+
+func MinMaxLoc(src *IplImage) (float32, float32, int, int, int, int) {
+	var minVal C.double
+	var maxVal C.double
+	var minLoc C.CvPoint
+	var maxLoc C.CvPoint
+	C.cvMinMaxLoc(unsafe.Pointer(src), &minVal, &maxVal, &minLoc, &maxLoc, nil)
+	return float32(minVal), float32(maxVal), int(minLoc.x), int(minLoc.y), int(maxLoc.x), int(maxLoc.y)
+}
+
 //CVAPI(void)  cvLine( CvArr* img, CvPoint pt1, CvPoint pt2,
 //                     CvScalar color, int thickness CV_DEFAULT(1),
 //                     int line_type CV_DEFAULT(8), int shift CV_DEFAULT(0) );
