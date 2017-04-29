@@ -16,6 +16,13 @@ func DecodeImageMem(data []byte) *IplImage {
 	return DecodeImage(unsafe.Pointer(buf), CV_LOAD_IMAGE_UNCHANGED)
 }
 
+/* EncodeImageMem encode an image to an in memory byte buffer. */
+func EncodeImageMem(img *IplImage) []byte {
+	mat := EncodeImage(".png", unsafe.Pointer(img), make([]int, 0))
+	defer mat.Release()
+	return mat.GetData()
+}
+
 /* FromImage converts a go image.Image to an opencv.IplImage. */
 func FromImage(img image.Image) *IplImage {
 	b := img.Bounds()
