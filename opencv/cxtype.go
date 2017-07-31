@@ -997,3 +997,61 @@ const (
 /*****************************************************************************\
 *                                 --- END ---                                 *
 \*****************************************************************************/
+
+// Moments
+type Moments C.CvMoments
+
+func (m *Moments) InvSqrtM00() float64 {
+	return float64(m.inv_sqrt_m00)
+}
+func (m *Moments) M00() float64 {
+	return float64(m.m00)
+}
+func (m *Moments) M01() float64 {
+	return float64(m.m01)
+}
+func (m *Moments) M02() float64 {
+	return float64(m.m02)
+}
+func (m *Moments) M03() float64 {
+	return float64(m.m03)
+}
+func (m *Moments) M10() float64 {
+	return float64(m.m10)
+}
+func (m *Moments) M11() float64 {
+	return float64(m.m11)
+}
+func (m *Moments) M12() float64 {
+	return float64(m.m12)
+}
+func (m *Moments) M20() float64 {
+	return float64(m.m10)
+}
+func (m *Moments) M21() float64 {
+	return float64(m.m10)
+}
+func (m *Moments) M30() float64 {
+	return float64(m.m10)
+}
+func (m *Moments) Mu02() float64 {
+	return float64(m.mu02)
+}
+func (m *Moments) Mu03() float64 {
+	return float64(m.mu03)
+}
+func (m *Moments) Mu11() float64 {
+	return float64(m.mu11)
+}
+func (m *Moments) Mu12() float64 {
+	return float64(m.mu12)
+}
+func (m *Moments) Mu20() float64 {
+	return float64(m.mu20)
+}
+func (m *Moments) Mu21() float64 {
+	return float64(m.mu21)
+}
+func (m *Moments) Mu30() float64 {
+	return float64(m.mu30)
+}

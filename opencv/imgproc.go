@@ -185,6 +185,8 @@ func BoundingRect(points unsafe.Pointer) Rect {
 	return (Rect)(C.cvBoundingRect(points, C.int(0)))
 }
 
+// MatchTemplate
+
 const (
 	CV_TM_SQDIFF        = int(C.CV_TM_SQDIFF)
 	CV_TM_SQDIFF_NORMED = int(C.CV_TM_SQDIFF_NORMED)
@@ -196,4 +198,12 @@ const (
 
 func MatchTemplate(img, template, result *IplImage, method int) {
 	C.cvMatchTemplate(unsafe.Pointer(img), unsafe.Pointer(template), unsafe.Pointer(result), C.int(method))
+}
+
+// CvMoments
+
+func CvMoments(seq *Seq, binary int) Moments {
+	var moments C.CvMoments
+	C.cvMoments(unsafe.Pointer(seq), &moments, C.int(binary))
+	return Moments(moments)
 }
