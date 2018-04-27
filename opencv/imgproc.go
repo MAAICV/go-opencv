@@ -207,3 +207,32 @@ func CvMoments(seq *Seq, binary int) Moments {
 	C.cvMoments(unsafe.Pointer(seq), &moments, C.int(binary))
 	return Moments(moments)
 }
+
+func InRange(input *IplImage, lowerb, upperb Scalar, output *IplImage) {
+	C.cvInRangeS(unsafe.Pointer(input), (C.CvScalar)(lowerb), (C.CvScalar)(upperb), unsafe.Pointer(output))
+}
+
+func HoughCircles(img *IplImage, method int, dp, minDist, p1, p2 float64, minr, maxr int) []Point3D32f {
+	var seq *C.CvSeq
+	storage := C.cvCreateMemStorage(0)
+	seq = C.cvHoughCircles(
+		unsafe.Pointer(img),
+		unsafe.Pointer(storage),
+		C.int(method),
+		C.double(dp),
+		C.double(minDist),
+		C.double(p1),
+		C.double(p2),
+		C.int(minr),
+		C.int(maxr),
+	)
+	s := (*Seq)(seq)
+
+	result := make([]Point3D32f, s.Total(), s.Total())
+	for i := 0; i < s.Total(); i++ {
+		ps := (*Point3D32f)(s.GetElemAt(i))
+		result[i] = *ps
+	}
+	C.cvReleaseMemStorage(&storage)
+	return result
+}
